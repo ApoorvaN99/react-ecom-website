@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { PRODUCTS } from '../products';
+import getStripe from '../pages/checkout/getStripe';
 
 export const ShopContext = createContext(null);
 
@@ -37,6 +38,29 @@ export const ShopContextProvider = (props) => {
     setCartItems(getDefaultCart());
   };
 
+  async function handleCheckout() {
+    const checkoutObjects = [];
+    for (let item in cartItems) {
+      if (cartItems[item] > 0) {
+        let envName = `REACT_APP_PUBLIC_STRIPE_PRICE_ID_product${item}`;
+        checkoutObjects.push({
+          price: process.env[envName],
+          quantity: cartItems[item],
+        });
+      }
+      console.log(checkoutObjects);
+    }
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: checkoutObjects,
+      mode: 'payment',
+      successUrl: `http://localhost:3000/success`,
+      cancelUrl: `http://localhost:3000/cancel`,
+      customerEmail: 'apoorvan1999@gmail.com',
+    });
+    console.warn(error.message);
+  }
+
   let context = {
     cartItems,
     addToCart,
@@ -44,6 +68,7 @@ export const ShopContextProvider = (props) => {
     updateItemCount,
     getTotalAmount,
     checkout,
+    handleCheckout,
   };
 
   return (
