@@ -61,6 +61,14 @@ export const ShopContextProvider = (props) => {
     console.warn(error.message);
   }
 
+  const getNumberOfItems = () => {
+    let sum = 0;
+    for (let item in cartItems) {
+      if (cartItems[item] !== 0) sum += 1;
+    }
+    return sum;
+  };
+
   let context = {
     cartItems,
     addToCart,
@@ -69,6 +77,7 @@ export const ShopContextProvider = (props) => {
     getTotalAmount,
     checkout,
     handleCheckout,
+    getNumberOfItems,
   };
 
   return (
