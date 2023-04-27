@@ -6,7 +6,7 @@
 }
 
 .cartItem {
-  width: 85vw;
+  width: 38vw;
   height: 250px;
   display: flex;
   align-items: center;
@@ -22,7 +22,7 @@
 
 .cartItem .description {
   width: 100%;
-  font-size: 30px;
+  font-size: 23px;
   margin: 10px;
 }
 
@@ -51,8 +51,18 @@
   cursor: pointer;
 }
 
+.cart .totalAmount {
+  margin: 10px auto;
+  text-align: center;
+}
+
 @media (max-width: 500px) {
   /* styles for screens less than 500px */
+
+  .cartItem {
+    width: 85vw;
+  }
+
   .cartItem img {
     width: 160px;
     height: auto;
