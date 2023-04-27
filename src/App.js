@@ -9,7 +9,7 @@ import Cancel from './pages/cancel/Cancel';
 
 function App() {
   return (
-    <>
+    <div className="App">
       <ShopContextProvider>
         <BrowserRouter>
           <Navbar />
@@ -22,7 +22,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </ShopContextProvider>
-    </>
+    </div>
   );
 }
 
